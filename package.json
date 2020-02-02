@@ -1,0 +1,25 @@
+{
+  "name": "stream-adventure",
+  "version": "1.0.0",
+  "description": "This folder contains solutions to the stream-adventure exercises: https://github.com/workshopper/stream-adventure",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.88.0",
+    "split": "^1.0.1",
+    "through2": "^3.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProgrammingPractice/stream-adventure.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ProgrammingPractice/stream-adventure/issues"
+  },
+  "homepage": "https://github.com/ProgrammingPractice/stream-adventure#readme"
+}
