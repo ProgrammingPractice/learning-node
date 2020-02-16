@@ -1,14 +1,17 @@
 {
-  "name": "stream-adventure",
+  "name": "stream-adventure-solution",
   "version": "1.0.0",
   "description": "This folder contains solutions to the stream-adventure exercises: https://github.com/workshopper/stream-adventure",
   "main": "index.js",
   "dependencies": {
     "request": "^2.88.0",
     "split": "^1.0.1",
+    "stream-adventure": "^4.1.1",
+    "stream-combiner": "^0.2.2",
     "through2": "^3.0.1",
     "trumpet": "^1.7.2",
-    "websocket-stream": "^5.5.0"
+    "websocket-stream": "^5.5.0",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {},
   "scripts": {
