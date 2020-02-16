@@ -1,5 +1,25 @@
+var duplexer = require('duplexer2');
+var through = require('through2').obj;
 
+function duplexer_function(counter_stream) {
+  var countries = {};
+  var writeable = through(transform, callback);
+  return duplexer({objectMode: true}, writeable, counter_stream);
 
+  function transform(row, _, next) {
+    countries[row.country] = (countries[row.country] || 0) + 1;
+    next();
+  }
+
+  function callback(done) {
+    counter_stream.setCounts(countries);
+    done();
+  }
+};
+
+// duplexer_function('echo', ['hello', 'world']).pipe(process.stdout);
+
+module.exports = duplexer_function;
 
 // In this example, you will be given a readable stream, `counter`, as the first
 // argument to your exported function:
