@@ -11,6 +11,11 @@ function combiner() {
   var current_genre;
 
   function write(raw_line, _, next) {
+    if (raw_line.toString() === '') {
+      next();
+      return;
+    }
+
     line = JSON.parse(raw_line.toString());
 
     if (line.type === 'genre') {
@@ -34,8 +39,7 @@ function combiner() {
   return combine(
     split(),
     group_books,
-    // zlib.createGzip()
-    // then gzip the output
+    zlib.createGzip()
   )
 }
 
@@ -49,7 +53,7 @@ function test() {
   input.pipe(combiner_stream).pipe(process.stdout);
 }
 
-test();
+// test();
 
 // Create a module in a new file named combiner.js, it should return a readable/writable stream using the
 // `stream-combiner` module.
