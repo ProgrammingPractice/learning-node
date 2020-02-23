@@ -1,31 +1,36 @@
 var combine = require('stream-combiner')
 var through = require('through2');
 var zlib = require('zlib');
-var stream = through(write, end);
+var split = require('split');
+var fs = require('fs');
 
-function write(buffer, encoding, next) {
-  // this.push(zlib.createGzip(buffer.toString());
-  next();
+
+function combiner() {
+  var group_books = through(write);
+
+  function write(buffer, _, next) {
+    this.push(buffer.toString());
+    next();
+  }
+
+  return combine(
+    split(),
+    group_books
+    // then gzip the output
+  )
 }
 
-function end(done) {
-  this.push(zlib.createGzip("A random string"));
-  done();
+module.exports = combiner;
+
+function test() {
+  var input = fs.createReadStream('test_data/books.json');
+
+  var combiner_stream = combiner();
+
+  input.pipe(combiner_stream).pipe(process.stdout);
 }
 
-module.exports = function () {
-	return stream;
-    // return combine(
-
-    //     // read newline-separated json,
-    //     // group books into genres,
-    //     // then gzip the output
-    // )
-}
-
-
-
-
+test();
 
 // Create a module in a new file named combiner.js, it should return a readable/writable stream using the
 // `stream-combiner` module.
