@@ -6,16 +6,35 @@ var fs = require('fs');
 
 
 function combiner() {
-  var group_books = through(write);
+  var group_books = through(write, end);
 
-  function write(buffer, _, next) {
-    this.push(buffer.toString());
+  var current_genre;
+
+  function write(raw_line, _, next) {
+    line = JSON.parse(raw_line.toString());
+
+    if (line.type === 'genre') {
+      if (current_genre) {
+        this.push(JSON.stringify(current_genre)+'\n');  
+      }
+      current_genre = {'name':line.name,'books':[]};
+    }
+    else {
+      current_genre.books.push(line.name);
+    }
+
     next();
+  }
+
+  function end(done) {
+    this.push(JSON.stringify(current_genre)+'\n');
+    done();
   }
 
   return combine(
     split(),
-    group_books
+    group_books,
+    // zlib.createGzip()
     // then gzip the output
   )
 }
