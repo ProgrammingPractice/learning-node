@@ -8,7 +8,16 @@ var unzip = zlib.createGunzip();
 var untar = tar.Parse();
 
 untar.on('entry', function(entry) {
-  console.log(entry.path);
+  if (entry.type === 'File') {
+    var md5 = crypto.createHash('md5', { encoding: 'hex' })
+    
+    entry.on('data', (chunk) => {
+      md5.update(chunk)
+    });
+    entry.on('end', () => {
+      console.log(`${md5.digest('hex')} ${entry.path}`);
+    });
+  }
 });
 
 var combiner = combine(
@@ -17,8 +26,7 @@ var combiner = combine(
   untar,
 );
 
-process.stdin.pipe(combiner); // .pipe(process.stdout);
-
+process.stdin.pipe(combiner);
 
 // ---
 // An encrypted, gzipped tar file will be piped in on process.stdin. To beat this
