@@ -1,3 +1,12 @@
+function logger(namespace) {
+  return function modifiedConsoleLog(...message) {
+    message.unshift(namespace);
+    console.log(...message);
+  };
+}
+
+module.exports = logger;
+
 //  Partial Application without Bind
 //  Exercise 9 of 18
 
@@ -111,9 +120,8 @@
 //     add.call(null, 10, 20) // => 30
 
 
-
 //  » To print these instructions again, run: functional-javascript print
 //  » To execute your program in a test environment, run: functional-javascript run program.js
 //  » To verify your program, run: functional-javascript verify program.js
 //  » For help run: functional-javascript help
-//  
+//
