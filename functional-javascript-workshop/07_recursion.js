@@ -12,15 +12,14 @@ function reduce(arr, fn, initial) {
   // RECURSIVE APPROACH
   function recursive_reduce(arr, fn, initial, orig_arr, inx) {
     if (arr.length === 0) return initial;
-    var partial_result = recursive_reduce(arr.slice(0, arr.length-1), fn, initial, orig_arr, inx-1);
-    return fn(partial_result, arr[arr.length-1], inx, arr);
+    const partial_result = recursive_reduce(arr.slice(0, arr.length - 1), fn, initial, orig_arr, inx - 1);
+    return fn(partial_result, arr[arr.length - 1], inx, arr);
   }
 
-  return recursive_reduce(arr, fn, initial, arr, arr.length-1 );
+  return recursive_reduce(arr, fn, initial, arr, arr.length - 1);
 }
 
-module.exports = reduce
-
+module.exports = reduce;
 
 
 // Recursion is a fundamental programming concept which can lead to elegant and efficient solutions to algorithmic problems. In fact, recursion is so powerful, all iterating behaviour can be defined using recursive functions. You will find recursion indispensable when iterating over nested data structures.

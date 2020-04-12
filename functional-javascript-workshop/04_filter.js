@@ -1,7 +1,5 @@
 function getShortMessages(messages) {
-  return messages.filter(function (element) {
-    return element.message.length < 50
-  }).map(element => element.message);
+  return messages.filter((element) => element.message.length < 50).map((element) => element.message);
 }
 
 module.exports = getShortMessages;

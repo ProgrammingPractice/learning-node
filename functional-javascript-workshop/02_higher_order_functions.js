@@ -1,5 +1,5 @@
 function operation(initial) {
-	return 'operation was called!';
+  return 'operation was called!';
 }
 
 // Solution 1
@@ -11,14 +11,14 @@ function operation(initial) {
 
 // Solution 2
 function repeat(operation, num) {
-	if (num > 0) {
-		operation();
-		repeat(operation, num-1);
-	}
+  if (num > 0) {
+    operation();
+    repeat(operation, num - 1);
+  }
 }
 
 // Do not remove the line below
-module.exports = repeat
+module.exports = repeat;
 
 
 // ---

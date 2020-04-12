@@ -1,16 +1,12 @@
 function checkUsersValid(goodUsers) {
   return function allUsersValid(submittedUsers) {
-    return submittedUsers.every(function (user) {
-      return goodUsers.find(function (goodUser) {
-        return user.id === goodUser.id;
-      });
-    });
+    return submittedUsers.every((user) => goodUsers.find((goodUser) => user.id === goodUser.id));
   };
 }
 
 // submittedUsers.all? { |user| goodUsers.include?(user.id) }
 
-module.exports = checkUsersValid
+module.exports = checkUsersValid;
 
 // ---
 //  Basic: Every Some

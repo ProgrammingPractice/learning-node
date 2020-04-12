@@ -1,21 +1,21 @@
 // our solution
 function countWords(inputWords) {
-  return inputWords.reduce(function (accumulator, element) {
+  return inputWords.reduce((accumulator, element) => {
     accumulator[element] = accumulator[element] || 0;
-    accumulator[element] = accumulator[element] + 1 
+    accumulator[element] = accumulator[element] + 1;
     return accumulator;
   }, {});
 }
 
 // reference solution
 function countWords2(arr) {
-  return arr.reduce(function(countMap, word) {
-    countMap[word] = ++countMap[word] || 1 // increment or initialize to 1
-    return countMap
-  }, {}) // second argument to reduce initialises countMap to {}
+  return arr.reduce((countMap, word) => {
+    countMap[word] = ++countMap[word] || 1; // increment or initialize to 1
+    return countMap;
+  }, {}); // second argument to reduce initialises countMap to {}
 }
 
-module.exports = countWords
+module.exports = countWords;
 
 // ---
 //  Basic: Reduce

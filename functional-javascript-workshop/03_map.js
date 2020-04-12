@@ -1,10 +1,8 @@
 function doubleAll(numbers) {
-  return numbers.map(function (element) {
-    return element * 2;
-  });
+  return numbers.map((element) => element * 2);
 }
 
-module.exports = doubleAll
+module.exports = doubleAll;
 
 // ---
 //  Basic: Map
