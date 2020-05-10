@@ -1,3 +1,27 @@
+function createFunction(args, functions, i) {
+  return function(arg) {
+    args[i] = arg;
+    return functions[i + 1];
+  }
+}
+
+function curryNIterative(fn, n) {
+  const args = [];
+  const functions = [];
+
+  functions[n - 1] = function(...remainingArgs) {
+    const completeArgs = args.concat(remainingArgs);
+    return fn(...completeArgs);
+  }
+  var i = n - 2;
+  while (i > 0 - 1) {
+    functions[i] = createFunction(args, functions, i);
+    i = i - 1;
+  }
+
+  return functions[0];
+}
+
 function curryNRecursive(fn, n, args, argsCount) {
   if (n === 1) {
     return function(...remaining_args) {
@@ -22,6 +46,7 @@ function curryN(fn, n) {
   // console.log('n to be used: ', n);
 
   return curryNRecursive(fn, n, [], n);
+  // return curryNIterative(fn, n);
 }
 
 // Official solution
@@ -43,6 +68,8 @@ function test1() {
   console.log(curryN(add3, 3)(1)(2)(3)); // => 6
   console.log(curryN(add3, 2)(1)(2, 3)); // => 6
 }
+// test1();
+
 function test2() {
   function add3(one, two, three) {
     return one + two + three
@@ -58,6 +85,8 @@ function test2() {
   result.push("curryN(add3)(1)(2)(3) => " + curryN(add3)(1)(2)(3)) // => 6
   console.log('result', result);
 }
+// test2();
+
 function test3() {
   function joinWithComma() {
     return Array.prototype.join.call(arguments, ',');
@@ -75,8 +104,6 @@ function test3() {
   result.push(curry4(5))
   console.log('result', result);
 }
-// test1();
-// test2();
 // test3();
 
 // This is an example implementation of curry3, which curries up to 3 arguments:
