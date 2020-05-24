@@ -1,14 +1,13 @@
 'use strict';
 
 var promise = new Promise((fulfill, reject) => {
-  // console.log('executor before fulfill');
   fulfill('PROMISE VALUE');
-  // console.log('executor after fulfill');
 });
 
 promise.then(console.log);
 
 console.log('MAIN PROGRAM');
+
 
 //  Always asynchronous
 //  Exercise 5 of 13
